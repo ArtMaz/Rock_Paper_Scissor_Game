@@ -51,6 +51,58 @@ function playRound(player_selection,computer_selection){
 
 }
 
+function game(){
+    standardized_rps=["Rock","Paper","Scissors"]; 
+    //Both variables are declared to keep track of the player and the computer scores
+    let players_score=0;
+    let computers_score=0;
 
+   /*  A for loop is called to play 5 rounds of Rock Paper Scissors, for each round the following things are shown and asked to the player:
+    1) The player is asked for its choice for this round
+    2) The number of the round being played
+    3) After inserting its choice ,the player shall see the result on screen of the current round, whether it was a win , lose or draw and the choices of both the player and the computer made*/
+    for (let i=0 ; i<5 ; i++){
+        console.log(`This is round number : ${i+1}`);
+        let players_choice=prompt(`Write your choice for this round (Rock,Paper,Scissors)`);//The Player is asked for its choice
+        let computers_choice =getComputerChoice(); //The computer generates its choice using the getComputerChoice() function
+        let round_result=playRound(players_choice,computers_choice); //The round is played using the playRound()function , the result is stored in the variable round_result ("Draw","Win","Lose")
+
+        std_players_choice=standardized_rps[["rock","paper","scissors"].indexOf(players_choice.toLowerCase())]; //Recalling the formatting of the playRound() function, in order to guarantee for the function to be insensible to lower, uper case, or any mix of both in the way the player's choice is typed , the players_choice is first made into lower case, then, using an auxiliar array ["rock","paper","scissors"], we can make a function where all the possible ways of typing Rock,Paper Scissors are send into the values 0,1,2 respectively, then using the standardized rock paper scissors array, we can send this three possible values into a nice ,first letter in upper case ,format.
+        
+
+        //The result of the round is then compared in this if else structure, and depending on the result adds a point to either to the player's score, the computer's score, or to neither.
+        if (round_result == "Draw"){
+            console.log(`It's a Draw!,both players choosed ${std_players_choice}`);
+        }
+        else{
+            if (round_result == "Win"){
+                
+                console.log(`It's a Win!, ${std_players_choice} beats ${computers_choice}`);
+                players_score=++players_score;
+            }
+            else{
+                console.log(`It's a Lose!, ${computers_choice}  beats  ${std_players_choice}`);
+                computers_score=++computers_score;
+
+            }
+
+        }
+
+    }
+    //The final scores are then compared and depending on whether the values are equal or different a player is called winner or it's a draw.
+
+    if (players_score==computers_score){
+        console.log(`Game Result: It's a Draw! Both players got ${players_score} points`)
+    }
+    else{
+        if (players_score > computers_score){
+            console.log(`Game Result: Player Wins! Player beats computer with ${players_score} points `)
+
+        }
+        else{
+            console.log(`Game Result: Computer Wins! Computer beats player with ${computers_score} points `)
+        }
+    }
+}
 
 
